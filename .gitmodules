@@ -1,0 +1,3 @@
+[submodule "spider_messages"]
+	path = spider_messages
+	url = https://github.com/at91sam7a3/spider_messages.git
