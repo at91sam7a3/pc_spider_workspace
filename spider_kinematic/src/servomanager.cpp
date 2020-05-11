@@ -23,10 +23,11 @@ static int degree2raw(int in)
 
 ServoManager::ServoManager(ros::NodeHandle& nh)
     :m_nh(nh)
-    ,power_pub(m_nh.advertise<spider_messages::LegPower>("servo_power", 100))
-    ,servo_pub(m_nh.advertise<spider_messages::Servo>("servo_pos", 100))
+    ,power_pub(m_nh.advertise<spider_messages::LegPower>("servo_power", 10,true))
+    ,servo_pub(m_nh.advertise<spider_messages::Servo>("servo_pos", 1000,true))
 {
-
+   ROS_INFO("Turning on power to servo");
+   Init();
 }
 
 void ServoManager::Init()
@@ -46,11 +47,22 @@ void ServoManager::setAngleF(int idx, double angle)
     s.Id = idx;
     s.Position = degree2raw(static_cast<int>(angle));
     servo_pub.publish(s);
+    ros::spinOnce();
+    ros::Duration(0.075).sleep();
 }
 
 void ServoManager::turnOnServoPower(bool state)
 {
+    if(state)
+    {
+        ROS_INFO("Turn Servo Power ON");
+    }
+    else
+    {
+        ROS_INFO("Turn Servo Power OFF");
+    }
     spider_messages::LegPower p;
     p.PowerToLegs = state;
     power_pub.publish(p);
+    ros::spinOnce();
 }

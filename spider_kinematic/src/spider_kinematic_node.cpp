@@ -23,10 +23,11 @@ int main(int argc, char *argv[])
     sigIntHandler.sa_flags = 0;
     sigaction(SIGINT, &sigIntHandler, NULL);
 
-    ros::init(argc,argv,"platform_power");
+    ros::init(argc,argv,"spider_kinematic");
     // ServoManager::Init();
-    spider::Platform::GetInstance()->Sleep();
+    spider::Platform::GetInstance()->TestMovements();
+    //spider::Platform::GetInstance()->MovementThread();
 
-    ros::spin();
+
     return 0;
 }

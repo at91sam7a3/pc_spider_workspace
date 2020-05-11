@@ -7,6 +7,7 @@ class ServoManager
 {
 public:
     ServoManager(ros::NodeHandle& m_nh);
+    ~ServoManager() = default;
     void Init();
     void Down();
     void setAngleF(int idx, double angle);
