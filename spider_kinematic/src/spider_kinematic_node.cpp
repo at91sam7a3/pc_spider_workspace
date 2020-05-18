@@ -25,8 +25,8 @@ int main(int argc, char *argv[])
 
     ros::init(argc,argv,"spider_kinematic");
     // ServoManager::Init();
-    spider::Platform::GetInstance()->TestMovements();
-    //spider::Platform::GetInstance()->MovementThread();
+    //spider::Platform::GetInstance()->TestMovements();
+    spider::Platform::GetInstance()->MovementThread();
 
 
     return 0;

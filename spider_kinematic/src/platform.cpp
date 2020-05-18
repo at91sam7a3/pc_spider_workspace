@@ -7,7 +7,7 @@
 
 namespace spider {
 
-static const double minimumDistanceStep=20; //TODO requires experiments
+static const double minimumDistanceStep=30; //TODO requires experiments
 
 const double PI=3.141592654;
 
@@ -37,7 +37,7 @@ void Platform::Sleep()
 void Platform::velocityCallback(const geometry_msgs::Twist::ConstPtr msg)
 {
     m_movementSpeed = vec2f(msg->linear.x*10, msg->linear.y*10);
-    m_rotationSpeed = msg->angular.z;
+    m_rotationSpeed = msg->angular.z*2;
     std::string report = "Speed "+std::to_string(m_movementSpeed.x);
     ROS_INFO(report.c_str());
 }
@@ -48,7 +48,7 @@ Platform::Platform()
     , m_velocity_sub(m_nh.subscribe("cmd_vel", 10, &Platform::velocityCallback, this))
     , m_servoManager(m_nh)
     , currentCoordinates(0,0)
-    , currentMovementSpeed(4)
+    , currentMovementSpeed(0)
     , directionAngle(0.0) //lets say we looking at North
     , m_rotationSpeed(0.0f)
     , m_movementSpeed(0.0f, 0.0f)
@@ -166,7 +166,7 @@ void Platform::prepareToGo()
 void Platform::MovementThread()
 {
     std::cout<<"Start movement thread"<<std::endl;
-    ros::Rate r(1);
+    ros::Rate r(10);
     prepareToGo();
     while(ros::ok())
     {
@@ -174,6 +174,7 @@ void Platform::MovementThread()
         //sleep if nothing to do
         ros::spinOnce();
         r.sleep();
+       // ROS_INFO(".");
     }
 }
 

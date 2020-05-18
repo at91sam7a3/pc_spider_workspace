@@ -48,7 +48,7 @@ void ServoManager::setAngleF(int idx, double angle)
     s.Position = degree2raw(static_cast<int>(angle));
     servo_pub.publish(s);
     ros::spinOnce();
-    ros::Duration(0.075).sleep();
+    //ros::Duration(0.075).sleep();
 }
 
 void ServoManager::turnOnServoPower(bool state)

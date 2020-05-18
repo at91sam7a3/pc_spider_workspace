@@ -19,7 +19,7 @@ static const double aLegPart=120;
 static const double centerYOffset=85;  //65
 static const double rearYOffset=50;
 static const double rearXOffset=86.5;
-static const double stepHeight = 80;//How far robot raise a leg on step
+static const double stepHeight = 40;//80;//How far robot raise a leg on step
 
 Leg::Leg(ServoManager& servoManager)
     :bodyHeight_(60)
