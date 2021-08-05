@@ -1,3 +1,6 @@
 [submodule "spider_messages"]
 	path = spider_messages
 	url = https://github.com/at91sam7a3/spider_messages.git
+[submodule "aruco_ros"]
+	path = aruco_ros
+	url = https://github.com/pal-robotics/aruco_ros.git
